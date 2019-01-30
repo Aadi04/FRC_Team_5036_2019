@@ -18,13 +18,13 @@ import frc.robot.Utils.PIDController;
 import frc.robot.commands.ArcadeDrive;
 
 public class DriveTrain extends Subsystem {
-  private VictorSP rightFront;
-  private VictorSP rightBack;
-  private VictorSP leftFront;
-  private VictorSP leftBack;
+  public VictorSP rightFront;
+  public VictorSP rightBack;
+  public VictorSP leftFront;
+  public VictorSP leftBack;
 
   // Gyro
-  ADXRS450_Gyro Gyro;
+  public ADXRS450_Gyro Gyro;
 
   // PID
   public PIDController drivePID;
@@ -52,12 +52,12 @@ public class DriveTrain extends Subsystem {
 
     // change negatives and stuff here
     if (left>1){
-      leftFront.set(-1);
-      leftBack.set(-1);
+      leftFront.set(1);
+      leftBack.set(1);
     }
     else{
-      leftFront.set(-left);
-      leftBack.set(-left);
+      leftFront.set(left);
+      leftBack.set(left);
     }
   }
 
@@ -65,12 +65,12 @@ public class DriveTrain extends Subsystem {
     double right = forward + rotation;
 
     if(right>1){
-      rightFront.set(1);
-      rightBack.set(1);
+      rightFront.set(-1);
+      rightBack.set(-1);
     }
     else{
-      rightFront.set(right);
-      rightBack.set(right);
+      rightFront.set(-right);
+      rightBack.set(-right);
     }
   }
 

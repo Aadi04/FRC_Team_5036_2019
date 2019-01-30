@@ -8,9 +8,11 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.DriveTrain;
@@ -127,5 +129,10 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
+    LiveWindow.addSensor("Gyro", "Drivetrain", Robot.m_DriveTrain.Gyro);
+    LiveWindow.addActuator("Motor1", "Drivetrain", Robot.m_DriveTrain.leftBack);
+    LiveWindow.addActuator("Motor1", "Drivetrain", Robot.m_DriveTrain.leftFront);
+    LiveWindow.addActuator("Motor1", "Drivetrain", Robot.m_DriveTrain.rightBack);
+    LiveWindow.addActuator("Motor1", "Drivetrain", Robot.m_DriveTrain.rightBack);
   }
 }
