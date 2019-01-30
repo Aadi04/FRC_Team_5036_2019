@@ -100,8 +100,8 @@ public boolean GyroConnected(){
 public void turnToAngle(double setPoint, double epsilon, double currentValue, double const_multiplier){
   double output = drivePID.calcPID(setPoint, currentValue, epsilon);
 
-  leftDriveOutput(0, -output);
-  rightDriveOutput(0, output);
+  leftDriveOutput(0, output);
+  rightDriveOutput(0, -output);
 
 }
 
