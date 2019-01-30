@@ -38,6 +38,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     m_oi = new OI();
+    updateSmartDashboard();
     //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
@@ -67,6 +68,7 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledPeriodic() {
     Scheduler.getInstance().run();
+    updateSmartDashboard();
   }
 
   /**
@@ -103,6 +105,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
+    updateSmartDashboard();
   }
 
   @Override
@@ -122,6 +125,8 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    updateSmartDashboard();
+
   }
 
   /**
@@ -129,10 +134,15 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
+    updateSmartDashboard();
     LiveWindow.addSensor("Gyro", "Drivetrain", Robot.m_DriveTrain.Gyro);
     LiveWindow.addActuator("Motor1", "Drivetrain", Robot.m_DriveTrain.leftBack);
     LiveWindow.addActuator("Motor1", "Drivetrain", Robot.m_DriveTrain.leftFront);
     LiveWindow.addActuator("Motor1", "Drivetrain", Robot.m_DriveTrain.rightBack);
     LiveWindow.addActuator("Motor1", "Drivetrain", Robot.m_DriveTrain.rightBack);
+  }
+
+  public void updateSmartDashboard(){
+    Robot.m_DriveTrain.updateDrivetrainSensors();
   }
 }
