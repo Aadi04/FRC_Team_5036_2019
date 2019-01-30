@@ -10,7 +10,11 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
+import frc.robot.Utils.NumberConstants;
+import frc.robot.Utils.PIDController;
 import frc.robot.commands.ArcadeDrive;
 
 public class DriveTrain extends Subsystem {
@@ -22,6 +26,11 @@ public class DriveTrain extends Subsystem {
   // Gyro
   ADXRS450_Gyro Gyro;
 
+  // PID
+  public PIDController drivePID;
+
+  public int atTargetCount = 0;
+
   public DriveTrain(){
     rightFront = new VictorSP(RobotMap.DRIVE_RIGHT_FRONT);
     rightBack = new VictorSP(RobotMap.DRIVE_RIGHT_BACK);
@@ -29,6 +38,9 @@ public class DriveTrain extends Subsystem {
     leftBack = new VictorSP(RobotMap.DRIVE_LEFT_BACK);
 
     Gyro = new ADXRS450_Gyro();
+
+
+    drivePID = new PIDController(NumberConstants.drive_kP, NumberConstants.drive_kI, NumberConstants.drive_kD);
   }
   @Override
   public void initDefaultCommand() {
@@ -62,6 +74,11 @@ public class DriveTrain extends Subsystem {
     }
   }
 
+  public void stop(){
+    leftDriveOutput(0, 0);
+    rightDriveOutput(0, 0);
+  }
+
   // gyro methods
 
   public double getCurrentAngle(){
@@ -78,6 +95,26 @@ public class DriveTrain extends Subsystem {
 
 public boolean GyroConnected(){
  return Gyro.isConnected();
+}
+
+public void turnToAngle(double setPoint, double epsilon, double currentValue, double const_multiplier){
+  double output = drivePID.calcPID(setPoint, currentValue, epsilon);
+
+  leftDriveOutput(0, -output);
+  rightDriveOutput(0, output);
+
+}
+
+public double atTarget (){
+  if (drivePID.isDone()){
+    atTargetCount++;
+  }
+  return atTargetCount;
+}
+
+public void updateDrivetrainSensors(){
+  SmartDashboard.putNumber("GyroAngle", getCurrentAngle());
+  SmartDashboard.putBoolean("Gyro Connected", GyroConnected());
 }
 
 }

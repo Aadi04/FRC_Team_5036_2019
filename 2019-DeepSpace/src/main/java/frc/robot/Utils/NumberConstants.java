@@ -22,4 +22,6 @@ public class NumberConstants{
     public static final double drive_kI = 0.01;
 	public static final double drive_kD = 0.1;
 
+	public static final double drive_epsilon = 1.5;
+
 }
