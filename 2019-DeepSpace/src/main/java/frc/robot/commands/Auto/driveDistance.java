@@ -8,13 +8,12 @@
 package frc.robot.commands.Auto;
 
 import edu.wpi.first.wpilibj.command.Command;
-import frc.robot.Robot;
+import frc.robot.*;
+import frc.robot.subsystems.*;
 
-public class TurnToAnlge extends Command {
-
+public class driveDistance extends Command {
   double setpoint, epsilon, const_multiplier;
-
-  public TurnToAnlge(double setpoint, double epsilon, double const_multiplier) {
+  public driveDistance(double setpoint, double epsilon, double const_multiplier) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.m_DriveTrain);
@@ -26,13 +25,14 @@ public class TurnToAnlge extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.m_DriveTrain.resetEnc();
     Robot.m_DriveTrain.resetGyro();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_DriveTrain.turnToAngle(setpoint, epsilon, const_multiplier);
+    Robot.m_DriveTrain.driveDistance(setpoint, epsilon, const_multiplier);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -49,7 +49,8 @@ public class TurnToAnlge extends Command {
   @Override
   protected void end() {
     Robot.m_DriveTrain.stop();
-  //  Robot.m_DriveTrain.drivePID.resetPID();
+   // Robot.m_DriveTrain.drivePID.resetPID();
+    System.out.println("PID DONE");
   }
 
   // Called when another command which requires one or more of the same

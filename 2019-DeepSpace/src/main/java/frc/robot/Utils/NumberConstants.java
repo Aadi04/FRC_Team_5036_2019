@@ -18,9 +18,9 @@ public class NumberConstants{
 	public static final double deltaT = 0.020;
 	
 	//DriveTrain PID Constants (change values)
-    public static final double drive_kP = 0.01;
-    public static final double drive_kI = 0.01;
-	public static final double drive_kD = 0.1;
+    public static double drive_kP = 0.01;
+    public static double drive_kI = 0.01;
+	public static double drive_kD = 0.1;
 
 	public static final double drive_epsilon = 1.5;
 

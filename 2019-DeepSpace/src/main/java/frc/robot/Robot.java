@@ -7,15 +7,25 @@
 
 package frc.robot;
 
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Utils.NumberConstants;
+import frc.robot.commands.Sequences.intakeSequence;
+import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Hatch;
+import frc.robot.subsystems.Intake;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -26,10 +36,17 @@ import frc.robot.subsystems.DriveTrain;
  */
 public class Robot extends TimedRobot {
   public static DriveTrain m_DriveTrain = new DriveTrain();
+  public static Conveyor m_conveyor = new Conveyor();
+  public static Intake m_intake = new Intake();
   public static OI m_oi;
+  public static Hatch m_hatch = new Hatch();
+  Compressor compressor;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
+  CommandGroup intakeSequence;
+
+  Preferences pref;
 
   /**
    * This function is run when the robot is first started up and should be
@@ -39,9 +56,14 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     m_oi = new OI();
     updateSmartDashboard();
+    CameraServer.getInstance().startAutomaticCapture();
     //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
+    compressor = new Compressor();
+    //NumberConstants.drive_kD = pref.getDouble("drive kD", 0.1);
+    //NumberConstants.drive_kI = pref.getDouble("drive kI", 0.03);
+    //NumberConstants.drive_kP = pref.getDouble("drive kP", 0.12);
   }
 
   /**
@@ -63,6 +85,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void disabledInit() {
+    if (m_autonomousCommand != null) {
+     m_autonomousCommand.cancel();
+   }
   }
 
   @Override
@@ -94,9 +119,9 @@ public class Robot extends TimedRobot {
      */
 
     // schedule the autonomous command (example)
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.start();
-    }
+   if (m_autonomousCommand != null) {
+     m_autonomousCommand.start();
+   }
   }
 
   /**
@@ -104,8 +129,8 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    Scheduler.getInstance().run();
-    updateSmartDashboard();
+   Scheduler.getInstance().run();
+    // updateSmartDashboard();
   }
 
   @Override
@@ -114,9 +139,11 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    if (m_autonomousCommand != null) {
+    if (m_autonomousCommand != null){
       m_autonomousCommand.cancel();
     }
+    compressor.start();
+
   }
 
   /**
@@ -135,14 +162,17 @@ public class Robot extends TimedRobot {
   @Override
   public void testPeriodic() {
     updateSmartDashboard();
-    LiveWindow.addSensor("Gyro", "Drivetrain", Robot.m_DriveTrain.Gyro);
-    LiveWindow.addActuator("Motor1", "Drivetrain", Robot.m_DriveTrain.leftBack);
-    LiveWindow.addActuator("Motor1", "Drivetrain", Robot.m_DriveTrain.leftFront);
-    LiveWindow.addActuator("Motor1", "Drivetrain", Robot.m_DriveTrain.rightBack);
-    LiveWindow.addActuator("Motor1", "Drivetrain", Robot.m_DriveTrain.rightBack);
   }
 
   public void updateSmartDashboard(){
     Robot.m_DriveTrain.updateDrivetrainSensors();
+    Robot.m_conveyor.updateConveyor();
+    SmartDashboard.putNumber("kP", Robot.m_DriveTrain.drivekP);
+    SmartDashboard.putNumber("kI", Robot.m_DriveTrain.drivekI);
+    SmartDashboard.putNumber("kD", Robot.m_DriveTrain.drivekD);
+    SmartDashboard.putNumber("Setpoint", Robot.m_DriveTrain.setPoint);
   }
+
+public static void m_conveyor(double throttle) {
+}
 }

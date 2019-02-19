@@ -24,4 +24,31 @@ public class RobotMap {
   //controller ports
   public static final int DRIVER_PORT = 0;
   public static final int OPERATOR_PORT = 1;
+
+  //Victor SPX
+  public static final int CONVEYOR1 = 5;
+  public static final int CONVEYOR2 = 6;
+  public static final int INTAKE = 7;
+
+  // SPARK (IDK WHY WE DONT JUST USE A RELAY)
+  public static final int LED = 0;
+
+  //Intake Pistons 
+  public static final int LEFT_PISTON_IN = 4; //Needs to be changed
+  public static final int LEFT_PISTON_OUT = 0;
+  //Hatch Pistons
+  public static final int PUNCHER_IN = 6;
+  public static final int PUNCHER_OUT = 2;
+  public static final int SLIDER_IN = 5;
+  public static final int SLIDER_OUT= 1;
+  public static final int BABY_SHARK_IN = 3;
+  public static final int BABY_SHARK_OUT = 7;
+
+  // hatch slider 0,4
+  
+
+
+  //Sensors
+  public static final int ENC_IN = 0;
+  public static final int ENC_OUT = 1;
 }

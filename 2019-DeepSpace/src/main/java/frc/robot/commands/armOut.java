@@ -5,58 +5,46 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.Auto;
+package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class TurnToAnlge extends Command {
-
-  double setpoint, epsilon, const_multiplier;
-
-  public TurnToAnlge(double setpoint, double epsilon, double const_multiplier) {
+public class armOut extends Command {
+  public armOut() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.m_DriveTrain);
-    this.setpoint = setpoint;
-    this.epsilon = epsilon;
-    this.const_multiplier = const_multiplier;
+    requires(Robot.m_intake);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.m_DriveTrain.resetGyro();
+    System.out.println("1");
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() {
-    Robot.m_DriveTrain.turnToAngle(setpoint, epsilon, const_multiplier);
+  protected void execute() 
+  {
+    Robot.m_intake.intakeOut();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if (Robot.m_DriveTrain.atTarget()){
-      return true;
-    } else {
-      return false;
-    }
+    return true;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.m_DriveTrain.stop();
-  //  Robot.m_DriveTrain.drivePID.resetPID();
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.m_DriveTrain.stop();
-   // Robot.m_DriveTrain.drivePID.resetPID();
+
   }
 }

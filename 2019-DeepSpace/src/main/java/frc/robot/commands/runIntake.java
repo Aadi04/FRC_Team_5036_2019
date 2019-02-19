@@ -5,58 +5,70 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.Auto;
+package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class TurnToAnlge extends Command {
-
-  double setpoint, epsilon, const_multiplier;
-
-  public TurnToAnlge(double setpoint, double epsilon, double const_multiplier) {
+public class runIntake extends Command {
+  public runIntake() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.m_DriveTrain);
-    this.setpoint = setpoint;
-    this.epsilon = epsilon;
-    this.const_multiplier = const_multiplier;
+    requires(Robot.m_intake);
+    requires(Robot.m_conveyor);
   }
 
   // Called just before this Command runs the first time
   @Override
-  protected void initialize() {
-    Robot.m_DriveTrain.resetGyro();
+  protected void initialize() 
+  {
+    System.out.println("its here");
+    
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() {
-    Robot.m_DriveTrain.turnToAngle(setpoint, epsilon, const_multiplier);
+  protected void execute() 
+  {
+    Robot.m_intake.runningIntake(0.90);
+    Robot.m_conveyor.runConveyor(-50);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
-  protected boolean isFinished() {
-    if (Robot.m_DriveTrain.atTarget()){
+  protected boolean isFinished() 
+  {
+    if (Robot.m_conveyor.buttonSensor() == false)
+    {
       return true;
-    } else {
+    } 
+    {
       return false;
     }
+
   }
 
   // Called once after isFinished returns true
   @Override
-  protected void end() {
-    Robot.m_DriveTrain.stop();
-  //  Robot.m_DriveTrain.drivePID.resetPID();
-  }
+  protected void end() 
+  {
+    Robot.m_conveyor.runConveyor(0);
+    Robot.m_intake.runningIntake(0); 
+    //Robot.m_conveyor.ledOn(1);
+    // if (Robot.m_conveyor.buttonSensor() == true)
+    // {
+    //   Robot.m_conveyor.ledOff(1);
+    // }
+    // else 
+    // {
+    //   Robot.m_conveyor.ledOn(0);
+    // }
+    }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    Robot.m_DriveTrain.stop();
-   // Robot.m_DriveTrain.drivePID.resetPID();
+
   }
 }

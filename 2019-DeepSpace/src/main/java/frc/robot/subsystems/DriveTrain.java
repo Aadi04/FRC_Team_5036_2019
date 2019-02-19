@@ -7,8 +7,17 @@
 
 package frc.robot.subsystems;
 
+import com.kauailabs.navx.frc.AHRS;
+
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.VictorSP;
+import edu.wpi.first.wpilibj.SerialPort.Port;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -22,12 +31,20 @@ public class DriveTrain extends Subsystem {
   public VictorSP rightBack;
   public VictorSP leftFront;
   public VictorSP leftBack;
+  
+  public double gyrokP, gyrokI, gyrokD;
+  public double drivekP, drivekI, drivekD;
+  public double setPoint;
 
   // Gyro
   public ADXRS450_Gyro Gyro;
 
+  //Encoder
+  public Encoder encoder;
+
   // PID
   public PIDController drivePID;
+  public PIDController gyroPID;
 
   public int atTargetCount = 0;
 
@@ -37,10 +54,23 @@ public class DriveTrain extends Subsystem {
     leftFront = new VictorSP(RobotMap.DRIVE_LEFT_FRONT);
     leftBack = new VictorSP(RobotMap.DRIVE_LEFT_BACK);
 
+    gyrokP = 0.12;
+    gyrokI = 0.0;
+    gyrokD = 0.3;
+    setPoint = 90;
+
+    drivekP = 0.11;
+    drivekI = 0.2;
+    drivekD = 0.05;
+
     Gyro = new ADXRS450_Gyro();
 
+    encoder = new Encoder (RobotMap.ENC_IN,RobotMap.ENC_OUT,false,Encoder.EncodingType.k4X);
+    encoder.setDistancePerPulse(3.25*Math.PI/128);
 
-    drivePID = new PIDController(NumberConstants.drive_kP, NumberConstants.drive_kI, NumberConstants.drive_kD);
+    gyroPID = new PIDController(gyrokP, gyrokI, gyrokD);
+    drivePID = new PIDController(drivekP, drivekI, drivekD);
+    //drivePID = new PIDController(NumberConstants.drive_kP, NumberConstants.drive_kI, NumberConstants.drive_kD);
   }
   @Override
   public void initDefaultCommand() {
@@ -74,19 +104,38 @@ public class DriveTrain extends Subsystem {
     }
   }
 
+  public void rightGearbox(double power){
+    rightFront.set(power);
+    rightBack.set(power);
+  }
+
+  public void leftGearbox(double power){
+    leftBack.set(power);
+    leftFront.set(power);
+  }
+
   public void stop(){
     leftDriveOutput(0, 0);
     rightDriveOutput(0, 0);
+  }
+  //Encoder Methods
+  public double getEncInTick()
+  {
+    return encoder.getRaw();
+  }
+  public void resetEnc(){
+    encoder.reset();
+  }
+  public double findingDist()
+  {
+    //return encoder.getRaw() / 93.0657;
+    return encoder.getDistance();
   }
 
   // gyro methods
 
   public double getCurrentAngle(){
     return Gyro.getAngle();
-  }
-
-  public void calibrateGyro(){
-    Gyro.calibrate();
   }
 
   public void resetGyro(){
@@ -97,24 +146,40 @@ public boolean GyroConnected(){
  return Gyro.isConnected();
 }
 
-public void turnToAngle(double setPoint, double epsilon, double currentValue, double const_multiplier){
-  double output = drivePID.calcPID(setPoint, currentValue, epsilon);
+public boolean atTarget(){
+  return drivePID.isDone();
+}
 
-  leftDriveOutput(0, output);
-  rightDriveOutput(0, -output);
+public void turnToAngle(double setPoint, double epsilon, double const_multiplier){
+  double output = gyroPID.calcPID(setPoint, getCurrentAngle(), epsilon);
+
+  leftGearbox(-output*const_multiplier);
+  rightGearbox(-output*const_multiplier);
 
 }
 
-public double atTarget (){
-  if (drivePID.isDone()){
-    atTargetCount++;
-  }
-  return atTargetCount;
+public void driveDistance(double setPoint, double epsilon, double const_multiplier){
+  double output = drivePID.calcPID(setPoint, findingDist(), epsilon);
+
+  leftGearbox((-output + (getCurrentAngle()*0.03))*const_multiplier);
+  rightGearbox((output - (getCurrentAngle()*0.03))*const_multiplier);
 }
+
+// public double atTarget (){
+//   if (drivePID.isDone()){
+//     atTargetCount++;
+//   }
+//   return atTargetCount;
+// }
 
 public void updateDrivetrainSensors(){
   SmartDashboard.putNumber("GyroAngle", getCurrentAngle());
   SmartDashboard.putBoolean("Gyro Connected", GyroConnected());
+  SmartDashboard.putNumber("Encoder in Ticks ", getEncInTick());
+  //SmartDashboard.putNumber("key", value)
+  SmartDashboard.putBoolean("PID at Target", atTarget());
+  SmartDashboard.putNumber("angle!", getCurrentAngle());
+  SmartDashboard.putNumber("distance", findingDist());
 }
 
 }
