@@ -66,7 +66,7 @@ public class DriveTrain extends Subsystem {
     Gyro = new ADXRS450_Gyro();
 
     encoder = new Encoder (RobotMap.ENC_IN,RobotMap.ENC_OUT,false,Encoder.EncodingType.k4X);
-    encoder.setDistancePerPulse(3.25*Math.PI/128);
+    encoder.setDistancePerPulse((3.25*Math.PI/128)*(3.25/6));
 
     gyroPID = new PIDController(gyrokP, gyrokI, gyrokD);
     drivePID = new PIDController(drivekP, drivekI, drivekD);

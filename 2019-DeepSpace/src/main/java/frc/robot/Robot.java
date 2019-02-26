@@ -26,6 +26,7 @@ import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Hatch;
 import frc.robot.subsystems.Intake;
+import frc.robot.commands.Auto.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -59,6 +60,9 @@ public class Robot extends TimedRobot {
     CameraServer.getInstance().startAutomaticCapture();
     //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
+    m_chooser.setDefaultOption("DO NOTHING", new DoNothingAuto());
+    m_chooser.addOption("Right 1 Hatch", new Right1Hatch());
+    m_chooser.addOption("Left 1 Hatch", new Left1Hatch());
     SmartDashboard.putData("Auto mode", m_chooser);
     compressor = new Compressor();
     //NumberConstants.drive_kD = pref.getDouble("drive kD", 0.1);
