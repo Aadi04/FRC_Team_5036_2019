@@ -9,7 +9,7 @@ package frc.robot.commands.Sequences;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.commands.*;
+import frc.robot.commands.CargoIntake.*;
 
 public class intakeSequence extends CommandGroup {
   /**

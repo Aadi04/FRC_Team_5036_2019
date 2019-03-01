@@ -5,10 +5,10 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.Sequences;
+package frc.robot.commands.CargoIntake;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.commands.reverseIntake;
+import frc.robot.commands.CargoIntake.reverseIntake;
 
 public class reverseSeq extends CommandGroup {
   /**

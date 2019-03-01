@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
-import frc.robot.commands.throtle;
+import frc.robot.commands.CargoIntake.throtle;
 
 /**
  * Add your docs here.

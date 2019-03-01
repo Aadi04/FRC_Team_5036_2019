@@ -5,17 +5,16 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.CargoIntake;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class throtle extends Command {
-  public throtle() {
+public class Outtake extends Command {
+  public Outtake() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.m_conveyor);
-    
   }
 
   // Called just before this Command runs the first time
@@ -25,20 +24,20 @@ public class throtle extends Command {
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() 
-  {
-    Robot.m_conveyor.runConveyor(-Robot.m_oi.getThrottle());
+  protected void execute() {
+    Robot.m_conveyor.runConveyor(-0.8);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return true;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.m_conveyor.runConveyor(0);
   }
 
   // Called when another command which requires one or more of the same

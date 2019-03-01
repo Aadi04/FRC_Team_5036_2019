@@ -5,17 +5,17 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.CargoIntake;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class reverseIntake extends Command {
-  public reverseIntake() {
+public class armIn extends Command {
+  public armIn() 
+  {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.m_intake);
-    requires(Robot.m_conveyor);
   }
 
   // Called just before this Command runs the first time
@@ -25,16 +25,15 @@ public class reverseIntake extends Command {
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() {
-    Robot.m_intake.runningIntake(-0.5);
-    Robot.m_conveyor.runConveyor(0.7);
-    
+  protected void execute() 
+  {
+    Robot.m_intake.intakeIn();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return true;
   }
 
   // Called once after isFinished returns true

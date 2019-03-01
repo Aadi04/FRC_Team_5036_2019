@@ -5,27 +5,29 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.CargoIntake;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class Outtake extends Command {
-  public Outtake() {
+public class armOut extends Command {
+  public armOut() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.m_conveyor);
+    requires(Robot.m_intake);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    System.out.println("1");
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() {
-    Robot.m_conveyor.runConveyor(-0.8);
+  protected void execute() 
+  {
+    Robot.m_intake.intakeOut();
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -37,12 +39,12 @@ public class Outtake extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.m_conveyor.runConveyor(0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+
   }
 }

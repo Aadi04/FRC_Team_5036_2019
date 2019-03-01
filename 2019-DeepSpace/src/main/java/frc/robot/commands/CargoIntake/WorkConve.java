@@ -5,70 +5,47 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.CargoIntake;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class runIntake extends Command {
-  public runIntake() {
+public class WorkConve extends Command {
+  public WorkConve() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.m_intake);
     requires(Robot.m_conveyor);
   }
 
   // Called just before this Command runs the first time
   @Override
-  protected void initialize() 
-  {
-    System.out.println("its here");
-    
+  protected void initialize() {
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() 
-  {
-    Robot.m_intake.runningIntake(0.90);
-    Robot.m_conveyor.runConveyor(-50);
+  protected void execute() {
+    Robot.m_conveyor.runConveyor(-0.45);
   }
-
   // Make this return true when this Command no longer needs to run execute()
   @Override
-  protected boolean isFinished() 
-  {
-    if (Robot.m_conveyor.buttonSensor() == false)
-    {
+  protected boolean isFinished() {
+    if (Robot.m_conveyor.buttonSensor() == false){
       return true;
-    } 
-    {
+    } else{
       return false;
     }
-
   }
 
   // Called once after isFinished returns true
   @Override
-  protected void end() 
-  {
+  protected void end() {
     Robot.m_conveyor.runConveyor(0);
-    Robot.m_intake.runningIntake(0); 
-    //Robot.m_conveyor.ledOn(1);
-    // if (Robot.m_conveyor.buttonSensor() == true)
-    // {
-    //   Robot.m_conveyor.ledOff(1);
-    // }
-    // else 
-    // {
-    //   Robot.m_conveyor.ledOn(0);
-    // }
-    }
+  }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-
   }
 }

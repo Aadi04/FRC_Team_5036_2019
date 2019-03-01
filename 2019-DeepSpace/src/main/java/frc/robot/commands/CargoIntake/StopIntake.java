@@ -5,17 +5,16 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
-
+package frc.robot.commands.CargoIntake;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class armIn extends Command {
-  public armIn() 
-  {
+public class StopIntake extends Command {
+  public StopIntake() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.m_intake);
+    requires(Robot.m_conveyor);
   }
 
   // Called just before this Command runs the first time
@@ -25,9 +24,9 @@ public class armIn extends Command {
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() 
-  {
-    Robot.m_intake.intakeIn();
+  protected void execute() {
+    Robot.m_intake.runningIntake(0);
+    Robot.m_conveyor.runConveyor(0);
   }
 
   // Make this return true when this Command no longer needs to run execute()

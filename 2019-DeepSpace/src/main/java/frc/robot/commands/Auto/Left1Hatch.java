@@ -8,6 +8,8 @@
 package frc.robot.commands.Auto;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.commands.Sequences.ScoreHatch;
+import frc.robot.commands.Sequences.StopHatch;
 
 public class Left1Hatch extends CommandGroup {
   /**
@@ -15,6 +17,21 @@ public class Left1Hatch extends CommandGroup {
    */
   public Left1Hatch() {
     // Add Commands here:
+
+    double firstStraightLine = 10;
+    double StraightAfterFirstTurn = 2;
+    double StraightAfterSecTurn = 10;
+    double Reverse = -10;
+
+    addSequential(new driveDistance(firstStraightLine, 2, 0.7));
+    addSequential(new TurnToAnlge(-90, 1, 0.7));
+    addSequential(new driveDistance(StraightAfterFirstTurn, 2, 0.7));
+    addSequential(new TurnToAnlge(90, 1, 0.7));
+    addSequential(new driveDistance(StraightAfterSecTurn, 2, 0.7));
+    addSequential(new ScoreHatch());
+    addSequential(new StopHatch());
+    addSequential(new driveDistance(Reverse, 2, 0.7));
+
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());
     // these will run in order.

@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.RunConveyor;
+import frc.robot.commands.CargoIntake.*;
 import frc.robot.commands.*;
 import frc.robot.commands.HatchCommands.*;
 import frc.robot.commands.Sequences.*;
