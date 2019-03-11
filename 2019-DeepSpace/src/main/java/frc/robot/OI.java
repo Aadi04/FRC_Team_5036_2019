@@ -58,7 +58,7 @@ public class OI
     this.scoreHatchSequence.whenPressed(new ScoreHatch());
     this.forceStopHatch.whenReleased(new StopHatch());
 
-    this.scoreBall.whileActive(new RunConveyor());
+    this.scoreBall.whileActive(new TimerDelayOutTake());
     //this.tunePID.whenPressed(new changePIDConstants());
     //this.tunePID.whenPressed(new TurnToAnlge(90, 0.5, 0.7));
 
