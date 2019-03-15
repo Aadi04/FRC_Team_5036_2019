@@ -31,7 +31,7 @@ public class runIntake extends Command {
   protected void execute() 
   {
     Robot.m_intake.runningIntake(0.90);
-    Robot.m_conveyor.runConveyor(-50);
+    Robot.m_conveyor.runConveyor(-0.65);
   }
 
   // Make this return true when this Command no longer needs to run execute()

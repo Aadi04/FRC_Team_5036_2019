@@ -12,12 +12,15 @@ import edu.wpi.first.wpilibj.Joystick;
 //import sun.tools.jconsole.inspector.OperationEntry;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.buttons.POVButton;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.CargoIntake.*;
 import frc.robot.commands.*;
 import frc.robot.commands.HatchCommands.*;
 import frc.robot.commands.Sequences.*;
 import frc.robot.commands.Auto.*;
+import frc.robot.commands.TimerDelayOutTake;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -33,7 +36,7 @@ public class OI
   private Button fullintakeSequence = new JoystickButton(operatorController, 6); // right trigger
   
   
-   private Button sliderIn =  new JoystickButton(operatorController, 7); //back button - force stop sequnce
+   private Button sliderIn =  new JoystickButton(operatorController, 2); //b button
    private Button sliderOut = new JoystickButton(operatorController, 3); //x button
 
    private Button scoreHatchSequence = new JoystickButton(driverController, 6); // left trigger pressed
@@ -43,6 +46,9 @@ public class OI
 
    //private Button tunePID = new JoystickButton(driverController, 6);
    private Button reverseSeq = new JoystickButton(operatorController, 4);
+   private Button allPuncherOut = new JoystickButton(operatorController, 5);// Left trigger Pressed
+   private Button allPuncherIn = new JoystickButton(operatorController, 5);// Left Trigger Released
+   private POVButton autoButton = new POVButton(operatorController, 0);
 
 
   public OI()
@@ -52,20 +58,26 @@ public class OI
     this.forceStopIntake.whenPressed(new stopIntakeSequence());
     this. reverseSeq.whenPressed(new reverseSeq());
     //Hatch
-    this.sliderIn.whenPressed(new puncherIn());
-    this.sliderOut.whenPressed(new puncherOut());
+    this.sliderIn.whenPressed(new SliderInAndLED());
+    this.sliderOut.whenPressed(new SliderOutAndLED());
 
     this.scoreHatchSequence.whenPressed(new ScoreHatch());
     this.forceStopHatch.whenReleased(new StopHatch());
 
-    this.scoreBall.whileActive(new TimerDelayOutTake());
+    this.scoreBall.whenPressed(new TimerDelayOutTake());
+    this.allPuncherOut.whenPressed(new allPusherOut());
+    this.allPuncherIn.whenReleased(new allPusherIn());
+
+    //this.autoButton.whenPressed(command);
     //this.tunePID.whenPressed(new changePIDConstants());
     //this.tunePID.whenPressed(new TurnToAnlge(90, 0.5, 0.7));
 
     //this.tunePID.whenPressed(new driveDistance(-100,1,0.5));
   }
   
-  //Driver Methods
+ 
+
+//Driver Methods
   public double getForward(){
     double forward = driverController.getRawAxis(1);
 
@@ -80,7 +92,7 @@ public class OI
   {
     double rotate = driverController.getRawAxis(4);
 
-    if (Math.abs(rotate)<0.03)
+    if (Math.abs(rotate * 0.4)<0.03) // Get Rid of the mutiply
       return 0.0;
     else 
       return rotate;

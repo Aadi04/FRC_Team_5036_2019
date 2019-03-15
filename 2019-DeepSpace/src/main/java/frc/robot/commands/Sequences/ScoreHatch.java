@@ -16,8 +16,8 @@ public class ScoreHatch extends CommandGroup {
    * Add your docs here.
    */
   public ScoreHatch() {
-    //addSequential(new sliderOut());
-    System.out.println("This is from Score Hatch");
+    addSequential(new sliderOut());
+    //System.out.println("This is from Score Hatch");
     addSequential(new babySharkHold());
     addSequential(new puncherOut());
     addParallel(new TurnLEDOn());
