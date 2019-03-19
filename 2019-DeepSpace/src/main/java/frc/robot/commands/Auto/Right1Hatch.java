@@ -20,7 +20,7 @@ public class Right1Hatch extends CommandGroup {
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());
     // these will run in order.
-    addSequential(new driveDistance(10, 2, 0.7));
+    addSequential(new driveDistance(100, 2, 0.7));
     addSequential(new ScoreHatch());
     addSequential(new StopHatch());
 

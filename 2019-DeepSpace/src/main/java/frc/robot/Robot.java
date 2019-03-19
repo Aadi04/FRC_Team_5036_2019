@@ -80,7 +80,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-  
+    updateSmartDashboard();
   }
 
   /**
@@ -98,7 +98,7 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledPeriodic() {
     Scheduler.getInstance().run();
-    updateSmartDashboard();
+    //updateSmartDashboard();
   }
 
   /**
@@ -147,7 +147,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null){
       m_autonomousCommand.cancel();
     }
-    compressor.start();
+    //compressor.start();
 
   }
 
@@ -157,7 +157,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-    updateSmartDashboard();
+    //updateSmartDashboard();
 
   }
 
@@ -166,18 +166,15 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
-    updateSmartDashboard();
+    //updateSmartDashboard();
   }
 
   public void updateSmartDashboard(){
     Robot.m_DriveTrain.updateDrivetrainSensors();
     Robot.m_conveyor.updateConveyor();
-    SmartDashboard.putNumber("kP", Robot.m_DriveTrain.drivekP);
-    SmartDashboard.putNumber("kI", Robot.m_DriveTrain.drivekI);
-    SmartDashboard.putNumber("kD", Robot.m_DriveTrain.drivekD);
-    SmartDashboard.putNumber("Setpoint", Robot.m_DriveTrain.setPoint);
+    // SmartDashboard.putNumber("kP", Robot.m_DriveTrain.drivekP);
+    // SmartDashboard.putNumber("kI", Robot.m_DriveTrain.drivekI);
+    // SmartDashboard.putNumber("kD", Robot.m_DriveTrain.drivekD);
+    // SmartDashboard.putNumber("Setpoint", Robot.m_DriveTrain.setPoint);
   }
-
-public static void m_conveyor(double throttle) {
-}
 }

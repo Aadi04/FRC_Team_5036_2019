@@ -55,7 +55,7 @@ public class Conveyor extends Subsystem {
   {
     LED.set(speed);
   }
-  public static boolean buttonSensor()
+  public boolean buttonSensor()
   {
     return button.get();
   }

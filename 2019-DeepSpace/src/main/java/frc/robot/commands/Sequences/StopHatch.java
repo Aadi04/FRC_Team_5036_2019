@@ -22,6 +22,7 @@ public class StopHatch extends CommandGroup {
     addSequential(new babySharkLetGo());
     addSequential(new sliderIn());
     addParallel(new TurnLEDoff());
+    cancel();
     
   }
 }

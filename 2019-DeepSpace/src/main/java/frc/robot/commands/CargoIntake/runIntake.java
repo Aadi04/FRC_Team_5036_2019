@@ -38,31 +38,20 @@ public class runIntake extends Command {
   @Override
   protected boolean isFinished() 
   {
-    if (Robot.m_conveyor.buttonSensor() == false)
-    {
-      return true;
-    } 
-    {
-      return false;
-    }
+    // if (Robot.m_conveyor.buttonSensor() == false) {
+    //   return true;
+    // } else {
+    //   return false;
+    // }
+    return !Robot.m_conveyor.buttonSensor();
 
   }
 
   // Called once after isFinished returns true
   @Override
-  protected void end() 
-  {
+  protected void end() {
     Robot.m_conveyor.runConveyor(0);
     Robot.m_intake.runningIntake(0); 
-    //Robot.m_conveyor.ledOn(1);
-    // if (Robot.m_conveyor.buttonSensor() == true)
-    // {
-    //   Robot.m_conveyor.ledOff(1);
-    // }
-    // else 
-    // {
-    //   Robot.m_conveyor.ledOn(0);
-    // }
     }
 
   // Called when another command which requires one or more of the same

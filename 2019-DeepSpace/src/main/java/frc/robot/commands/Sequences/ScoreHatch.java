@@ -21,5 +21,6 @@ public class ScoreHatch extends CommandGroup {
     addSequential(new babySharkHold());
     addSequential(new puncherOut());
     addParallel(new TurnLEDOn());
+    cancel();
   }
 }
