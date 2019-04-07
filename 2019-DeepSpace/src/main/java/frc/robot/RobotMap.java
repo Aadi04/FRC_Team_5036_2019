@@ -34,7 +34,7 @@ public class RobotMap {
   public static final int LED = 0;
 
   //Intake Pistons 
-  public static final int LEFT_PISTON_IN = 4; //Needs to be changed
+  public static final int LEFT_PISTON_IN = 4; 
   public static final int LEFT_PISTON_OUT = 0;
   //Hatch Pistons
   public static final int PUNCHER_IN = 6;
@@ -44,11 +44,14 @@ public class RobotMap {
   public static final int BABY_SHARK_IN = 3;
   public static final int BABY_SHARK_OUT = 7;
 
-  // hatch slider 0,4
+  // new hatch mech
+  public static final int HATCH_INTAKE = 0; //Needs to be changed
   
 
 
   //Sensors
   public static final int ENC_IN = 0;
   public static final int ENC_OUT = 1;
+  public static final int LIMITSWITCH_1 = 0; //Needs to be Changed
+  public static final int LIMITSWITCH_2 = 0; //Needs to be Changed
 }

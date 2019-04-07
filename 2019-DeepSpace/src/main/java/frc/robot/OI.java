@@ -18,6 +18,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.CargoIntake.*;
 import frc.robot.commands.*;
 import frc.robot.commands.HatchCommands.*;
+import frc.robot.commands.NewHatchMech.HatchIntakeSeq;
+import frc.robot.commands.NewHatchMech.HatchOutakeSeq;
 import frc.robot.commands.Sequences.*;
 import frc.robot.commands.Auto.*;
 import frc.robot.commands.TimerDelayOutTake;
@@ -38,17 +40,23 @@ public class OI
   
    private Button sliderIn =  new JoystickButton(operatorController, 2); //b button
    private Button sliderOut = new JoystickButton(operatorController, 3); //x button
+   private Button reverseSeq = new JoystickButton(operatorController, 4);// y button 
 
-   private Button scoreHatchSequence = new JoystickButton(driverController, 6); // left trigger pressed
-   private Button forceStopHatch = new JoystickButton(driverController, 6); // left trigger released
+   private Button hatchIntake = new JoystickButton(operatorController, 5); //left trigger
+
+
+   //private Button scoreHatchSequence = new JoystickButton(driverController, 6); // left trigger pressed
+   //private Button forceStopHatch = new JoystickButton(driverController, 6); // left trigger released
 
    private Button scoreBall = new JoystickButton(driverController, 5);
+   private Button scoreHatch = new JoystickButton(driverController, 6);
 
+   
    //private Button tunePID = new JoystickButton(driverController, 6);
-   private Button reverseSeq = new JoystickButton(operatorController, 4);
-   private Button allPuncherOut = new JoystickButton(operatorController, 5);// Left trigger Pressed
-   private Button allPuncherIn = new JoystickButton(operatorController, 5);// Left Trigger Released
-   private POVButton autoButton = new POVButton(operatorController, 0);
+   
+  //private Button allPuncherOut = new JoystickButton(operatorController, 5);// Left trigger Pressed
+  //private Button allPuncherIn = new JoystickButton(operatorController, 5);// Left Trigger Released
+   //private POVButton autoButton = new POVButton(operatorController, 0);
 
 
   public OI()
@@ -60,13 +68,16 @@ public class OI
     //Hatch
     this.sliderIn.whenPressed(new SliderInAndLED());
     this.sliderOut.whenPressed(new SliderOutAndLED());
+    this.hatchIntake.whenPressed(new HatchIntakeSeq());
+    this.scoreHatch.whenPressed(new HatchOutakeSeq());
 
-    this.scoreHatchSequence.whenPressed(new ScoreHatch());
-    this.forceStopHatch.whenReleased(new StopHatch());
+    //this.scoreHatchSequence.whenPressed(new ScoreHatch());
+    //this.forceStopHatch.whenReleased(new StopHatch());
 
     this.scoreBall.whenPressed(new TimerDelayOutTake());
-    this.allPuncherOut.whenPressed(new allPusherOut());
-    this.allPuncherIn.whenReleased(new allPusherIn());
+
+    // this.allPuncherOut.whenPressed(new allPusherOut());
+    // this.allPuncherIn.whenReleased(new allPusherIn());
 
     //this.autoButton.whenPressed(command);
     //this.tunePID.whenPressed(new changePIDConstants());
@@ -92,7 +103,7 @@ public class OI
   {
     double rotate = driverController.getRawAxis(4);
 
-    if (Math.abs(rotate * 0.4)<0.03) // Get Rid of the mutiply
+    if (Math.abs(rotate)<0.03) // Get Rid of the mutiply
       return 0.0;
     else 
       return rotate;

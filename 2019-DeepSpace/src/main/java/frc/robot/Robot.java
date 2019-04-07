@@ -26,6 +26,7 @@ import frc.robot.subsystems.Conveyor;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Hatch;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.NewHatchMech;
 import frc.robot.commands.Auto.*;
 
 /**
@@ -41,6 +42,7 @@ public class Robot extends TimedRobot {
   public static Intake m_intake = new Intake();
   public static OI m_oi;
   public static Hatch m_hatch = new Hatch();
+  public static NewHatchMech m_newHatch = new NewHatchMech();
   Compressor compressor;
 
   Command m_autonomousCommand;
