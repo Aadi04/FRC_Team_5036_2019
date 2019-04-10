@@ -75,7 +75,7 @@ public class OI
     this.scoreBall.whenPressed(new TimerDelayOutTake());
     this.scoreHatch.whenPressed(new HatchOutakeSeq());
     
-    this.visionAlign.whenPressed(new VisionTurnToAngle());
+    this.visionAlign.whenPressed(new VisionTurnToAngle(1));
     
     
     //this.scoreHatchSequence.whenPressed(new ScoreHatch());
