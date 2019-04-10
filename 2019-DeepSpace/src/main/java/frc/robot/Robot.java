@@ -174,6 +174,7 @@ public class Robot extends TimedRobot {
   public void updateSmartDashboard(){
     Robot.m_DriveTrain.updateDrivetrainSensors();
     Robot.m_conveyor.updateConveyor();
+    Robot.m_newHatch.updateHatchMech();
     // SmartDashboard.putNumber("kP", Robot.m_DriveTrain.drivekP);
     // SmartDashboard.putNumber("kI", Robot.m_DriveTrain.drivekI);
     // SmartDashboard.putNumber("kD", Robot.m_DriveTrain.drivekD);

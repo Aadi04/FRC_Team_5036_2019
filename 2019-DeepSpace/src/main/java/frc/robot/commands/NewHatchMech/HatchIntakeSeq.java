@@ -8,7 +8,7 @@
 package frc.robot.commands.NewHatchMech;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.commands.HatchCommands.puncherOut;
+import frc.robot.commands.OldHatchCommands.HatchSliderOut;
 
 public class HatchIntakeSeq extends CommandGroup {
   /**
@@ -19,7 +19,7 @@ public class HatchIntakeSeq extends CommandGroup {
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());
     // these will run in order.
-    addSequential(new puncherOut());
+    addSequential(new HatchSliderOut());
     addParallel(new Intake_NewHatchMech());
 
     // To run multiple commands at the same time,

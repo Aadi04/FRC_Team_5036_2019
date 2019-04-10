@@ -9,7 +9,6 @@ package frc.robot.commands.CargoIntake;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.subsystems.Conveyor;
 
 public class RunConveyor extends Command {
 
@@ -31,12 +30,6 @@ public class RunConveyor extends Command {
   @Override
   protected void execute() 
   {
-    // if (Conveyor.buttonSensor() == true) {
-    //   Robot.m_conveyor.runConveyor(0.75);
-    // } else {
-    //   Robot.m_conveyor.runConveyor(0);
-    //  // Finished = true;
-    // }
     Robot.m_conveyor.runConveyor(-1);
     
   }

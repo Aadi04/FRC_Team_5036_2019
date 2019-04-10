@@ -8,8 +8,7 @@
 package frc.robot.commands.Auto;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.commands.Sequences.ScoreHatch;
-import frc.robot.commands.Sequences.StopHatch;
+
 
 public class Right1Hatch extends CommandGroup {
   /**
@@ -20,9 +19,10 @@ public class Right1Hatch extends CommandGroup {
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());
     // these will run in order.
+   
     addSequential(new driveDistance(100, 2, 0.7));
-    addSequential(new ScoreHatch());
-    addSequential(new StopHatch());
+    // addSequential(new ScoreHatch());
+    // addSequential(new StopHatch());
 
     // To run multiple commands at the same time,
     // use addParallel()

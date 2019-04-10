@@ -8,7 +8,7 @@
 package frc.robot.commands.Sequences;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.commands.HatchCommands.puncherOut;
+import frc.robot.commands.OldHatchCommands.HatchSliderOut;
 import frc.robot.commands.*;
 
 public class SliderOutAndLED extends CommandGroup {
@@ -17,7 +17,7 @@ public class SliderOutAndLED extends CommandGroup {
    */
   public SliderOutAndLED() {
 
-    addSequential(new puncherOut());
+    addSequential(new HatchSliderOut());
     addParallel(new TurnLEDOn());
     // Add Commands here:
     // e.g. addSequential(new Command1());

@@ -9,14 +9,14 @@ package frc.robot.commands.Sequences;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.commands.*;
-import frc.robot.commands.HatchCommands.puncherIn;
+import frc.robot.commands.OldHatchCommands.HatchSliderIn;
 
 public class SliderInAndLED extends CommandGroup {
   /**
    * Add your docs here.
    */
   public SliderInAndLED() {
-    addSequential(new puncherIn());
+    addSequential(new HatchSliderIn());
     addParallel(new TurnLEDoff());
     // Add Commands here:
     // e.g. addSequential(new Command1());

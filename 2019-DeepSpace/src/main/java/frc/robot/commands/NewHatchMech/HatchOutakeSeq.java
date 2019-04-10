@@ -8,7 +8,8 @@
 package frc.robot.commands.NewHatchMech;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.robot.commands.HatchCommands.puncherIn;
+import frc.robot.commands.OldHatchCommands.HatchSliderIn;
+
 
 public class HatchOutakeSeq extends CommandGroup {
   /**
@@ -16,7 +17,7 @@ public class HatchOutakeSeq extends CommandGroup {
    */
   public HatchOutakeSeq() {
     addSequential(new Outake_NewHatchMech());
-    addSequential(new puncherIn());
+    addSequential(new HatchSliderIn());
     // Add Commands here:
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());

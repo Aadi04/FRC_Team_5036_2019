@@ -19,11 +19,11 @@ public class Hatch extends Subsystem
     {
         Puncher.set(DoubleSolenoid.Value.kForward);
     }
-    public void puncherIn()
+    public void HatchSliderIn()
     {
         Puncher.set(DoubleSolenoid.Value.kReverse);
     }
-    public void sliderOut()
+    public void HatchSliderOut()
     {
         Slider.set(DoubleSolenoid.Value.kForward);
     }

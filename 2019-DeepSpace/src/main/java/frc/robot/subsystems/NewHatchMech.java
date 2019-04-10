@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 
 /**
@@ -51,6 +52,11 @@ public class NewHatchMech extends Subsystem{
         {
              LED.set(0);
         }
+   }
+   public void updateHatchMech()
+   {
+        SmartDashboard.getBoolean("LimitSwitch1", LimitSwitch1());
+        SmartDashboard.getBoolean("LimitSwitch2",LimitSwitch2());
    }
    
     @Override

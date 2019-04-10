@@ -5,13 +5,13 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.HatchCommands;
+package frc.robot.commands.OldHatchCommands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class babySharkLetGo extends Command {
-  public babySharkLetGo() {
+public class HatchSliderIn extends Command {
+  public HatchSliderIn() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.m_hatch);
@@ -19,13 +19,15 @@ public class babySharkLetGo extends Command {
 
   // Called just before this Command runs the first time
   @Override
-  protected void initialize() {
+  protected void initialize() 
+  {
+    System.out.println("This is from PuncherIn");
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_hatch.babySharkExtend();
+    Robot.m_hatch.HatchSliderIn();
   }
 
   // Make this return true when this Command no longer needs to run execute()

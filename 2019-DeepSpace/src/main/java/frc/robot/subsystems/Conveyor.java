@@ -25,7 +25,7 @@ public class Conveyor extends Subsystem {
   public VictorSPX ConveyorFront;
   public VictorSPX ConveyorBack;
   public Spark LED;
-  public static DigitalInput button;
+  public static DigitalInput button,button1,button2;
   public PowerDistributionPanel pdp;
 
 
@@ -33,7 +33,9 @@ public class Conveyor extends Subsystem {
     ConveyorBack = new VictorSPX(RobotMap.CONVEYOR1);
     ConveyorFront = new VictorSPX(RobotMap.CONVEYOR2);
     LED = new Spark(RobotMap.LED);
-    button = new DigitalInput(2);
+    button = new DigitalInput(RobotMap.BUTTON_SENSOR);
+    button1 = new DigitalInput(RobotMap.BUTTON_SENSOR_1);
+    button2 = new DigitalInput(RobotMap.BUTTON_SENSOR_2);
     pdp = new PowerDistributionPanel();
 
     //ConveyorBack.follow(ConveyorFront);
@@ -59,30 +61,26 @@ public class Conveyor extends Subsystem {
   {
     return button.get();
   }
+  public boolean buttonSensor1()
+  {
+    return button1.get();
+  }
+  public boolean buttonSensor2()
+  {
+    return button2.get();
+  }
 
     @Override
     protected void initDefaultCommand() {
       setDefaultCommand(new throtle());
 
     }
-  public double getCurrent5()
-  {
-    return pdp.getCurrent(1);
-  }
-  public double getCurrent6()
-  {
-    return pdp.getCurrent(0);
-  }
-  public double getCurrentAvg()
-  {
-    return (getCurrent5() + getCurrent6()) / 2;
-  }
   
   public void updateConveyor()
   {
     SmartDashboard.putBoolean("button", buttonSensor());
-    SmartDashboard.putNumber("Current 5", getCurrent5());
-    SmartDashboard.putNumber("Current 6", getCurrent6());
+    SmartDashboard.putBoolean("button1", buttonSensor1());
+    SmartDashboard.putBoolean("button2", buttonSensor2());
   }
  
 
