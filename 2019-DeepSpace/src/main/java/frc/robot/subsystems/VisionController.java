@@ -30,7 +30,7 @@ public class VisionController extends Subsystem{
         driveWanted = devilVision.getEntry("Driver");
         tapeWanted = devilVision.getEntry("Tape");
 
-        videoTimeStamp = devilVision.getEntry("VideoTimestamp");
+        //videoTimeStamp = devilVision.getEntry("VideoTimestamp");
 
         tapeVision = true;
         driverVision = false;
@@ -44,24 +44,16 @@ public class VisionController extends Subsystem{
         tapeWanted.setBoolean(tapeVision);
     }
 
-    public void updateSmartdashboard(){
-
-        SmartDashboard.putBoolean("Driver Mode", driverVision);
-        SmartDashboard.putBoolean("Vision Mode", tapeVision);
-
-        driveWanted.setBoolean(driverVision);
-        tapeWanted.setBoolean(tapeVision);
-
-        if (tapeVision){
-            targetAngle = tapeYaw.getDouble(999);
-            tape_Detected = tapeDetected.getBoolean(false);
-            SmartDashboard.putNumber("target angle", targetAngle);
-            SmartDashboard.putBoolean("Tape detected", tape_Detected);
-        }
+    public void updateVision(){
+            //targetAngle = tapeYaw.getDouble(999);
+            //tape_Detected = tapeDetected.getBoolean(false);
+            SmartDashboard.putBoolean("Tape Detected?", tape_Detected);
+            //SmartDashboard.getNumber("target angle", targetYaw());
+            SmartDashboard.putBoolean("Vision Enabled", isEnabled());
     }
 
     public double targetYaw() {
-		return targetAngle;
+		return tapeYaw.getDouble(999);
 	}
 	
 	public void enable() {

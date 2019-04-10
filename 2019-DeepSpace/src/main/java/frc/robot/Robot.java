@@ -8,6 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -27,6 +28,7 @@ import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Hatch;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.NewHatchMech;
+import frc.robot.subsystems.VisionController;
 import frc.robot.commands.Auto.*;
 
 /**
@@ -43,6 +45,7 @@ public class Robot extends TimedRobot {
   public static OI m_oi;
   public static Hatch m_hatch = new Hatch();
   public static NewHatchMech m_newHatch = new NewHatchMech();
+  public static VisionController vision = new VisionController();
   Compressor compressor;
 
   Command m_autonomousCommand;
@@ -50,6 +53,7 @@ public class Robot extends TimedRobot {
   CommandGroup intakeSequence;
 
   Preferences pref;
+  
 
   /**
    * This function is run when the robot is first started up and should be
@@ -67,6 +71,7 @@ public class Robot extends TimedRobot {
     m_chooser.addOption("Left 1 Hatch", new Left1Hatch());
     SmartDashboard.putData("Auto mode", m_chooser);
     compressor = new Compressor();
+
     //NumberConstants.drive_kD = pref.getDouble("drive kD", 0.1);
     //NumberConstants.drive_kI = pref.getDouble("drive kI", 0.03);
     //NumberConstants.drive_kP = pref.getDouble("drive kP", 0.12);
@@ -175,6 +180,7 @@ public class Robot extends TimedRobot {
     Robot.m_DriveTrain.updateDrivetrainSensors();
     Robot.m_conveyor.updateConveyor();
     Robot.m_newHatch.updateHatchMech();
+    Robot.vision.updateVision();
     // SmartDashboard.putNumber("kP", Robot.m_DriveTrain.drivekP);
     // SmartDashboard.putNumber("kI", Robot.m_DriveTrain.drivekI);
     // SmartDashboard.putNumber("kD", Robot.m_DriveTrain.drivekD);
