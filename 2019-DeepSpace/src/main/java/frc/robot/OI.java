@@ -47,6 +47,8 @@ public class OI
   private Button scoreBall = new JoystickButton(driverController, 5);
   private Button scoreHatch = new JoystickButton(driverController, 6);
 
+  private Button visionAlign = new JoystickButton(operatorController, 1); // chnage the button if you want
+
    
   //private Button scoreHatchSequence = new JoystickButton(driverController, 6); // left trigger pressed
   //private Button forceStopHatch = new JoystickButton(driverController, 6); // left trigger released
@@ -74,6 +76,7 @@ public class OI
     this.scoreBall.whenPressed(new TimerDelayOutTake());
     this.scoreHatch.whenPressed(new HatchOutakeSeq());
     
+    this.visionAlign.whenPressed(new VisionTurnToAngle(1));
     
     
     //this.scoreHatchSequence.whenPressed(new ScoreHatch());
