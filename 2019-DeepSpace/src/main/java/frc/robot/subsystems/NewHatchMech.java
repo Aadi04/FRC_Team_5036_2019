@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
+import frc.robot.subsystems.*;
 
 /**
  * Add your docs here.
@@ -21,14 +22,14 @@ public class NewHatchMech extends Subsystem{
 
    public VictorSP intake;
    public DigitalInput limitswitch1, limitswitch2;
-   public Spark LED;
+   public static Conveyor conveyor = new Conveyor();
+   
 
    public NewHatchMech()
    {
        intake = new VictorSP(RobotMap.HATCH_INTAKE);
        limitswitch1 = new DigitalInput(RobotMap.LIMITSWITCH_1);
        limitswitch2 = new DigitalInput(RobotMap.LIMITSWITCH_2);
-       LED = new Spark(RobotMap.LED);
    }
    public void runIntake(double power)
    {
@@ -46,11 +47,11 @@ public class NewHatchMech extends Subsystem{
    {
         if (LimitSwitch1() == true && LimitSwitch2() == true)
         {
-             LED.set(1);
+            conveyor.ledOn(1);
         }
         else 
         {
-             LED.set(0);
+             conveyor.ledOff(0);
         }
    }
    public void updateHatchMech()

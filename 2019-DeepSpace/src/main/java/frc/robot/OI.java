@@ -60,7 +60,8 @@ public class OI
 
   public OI()
   {
-   // INTAKE
+   
+    // INTAKE
     this.fullintakeSequence.whenPressed(new intakeSequence());
     this.forceStopIntake.whenPressed(new stopIntakeSequence());
     this. reverseSeq.whenPressed(new reverseSeq());

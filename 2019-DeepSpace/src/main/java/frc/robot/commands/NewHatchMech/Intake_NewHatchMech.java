@@ -27,20 +27,21 @@ public class Intake_NewHatchMech extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_newHatch.runIntake(0.7);
+    Robot.m_newHatch.runIntake(-0.6);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if (Robot.m_newHatch.LimitSwitch1() == true && Robot.m_newHatch.LimitSwitch2() == true)
-    {
-      return true;
-    }
-    else 
-    {
-      return false;
-    }
+    // if (Robot.m_newHatch.LimitSwitch1() == true && Robot.m_newHatch.LimitSwitch2() == true)
+    // {
+    //   return true;
+    // }
+    // else 
+    // {
+    //   return false;
+    // }
+    return false;
 
   }
 
@@ -48,7 +49,7 @@ public class Intake_NewHatchMech extends Command {
   @Override
   protected void end() {
     Robot.m_newHatch.runIntake(0);
-    Robot.m_newHatch.LEDS();
+    //Robot.m_newHatch.LEDS();
     //Robot.m_conveyor.ledOn(1);
   }
 

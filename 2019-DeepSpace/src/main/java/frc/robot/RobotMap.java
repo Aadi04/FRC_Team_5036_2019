@@ -45,17 +45,19 @@ public class RobotMap {
   public static final int BABY_SHARK_OUT = 7;
 
   // new hatch mech
-  public static final int HATCH_INTAKE = 0; //Needs to be changed
+  public static final int HATCH_INTAKE = 9; //Needs to be changed
   
 
 
   //Sensors
   public static final int ENC_IN = 0;
   public static final int ENC_OUT = 1;
-  public static final int LIMITSWITCH_1 = 0; //Needs to be Changed
-  public static final int LIMITSWITCH_2 = 0; //Needs to be Changed
-  public static final int BUTTON_SENSOR = 2; 
-  public static final int BUTTON_SENSOR_1 = 0; // Needs to be Changed 
-  public static final int BUTTON_SENSOR_2 = 0; //Needs to be Changed 
+
+  public static final int LIMITSWITCH_1 = 5; //Needs to be Changed
+  public static final int LIMITSWITCH_2 = 2; //Needs to be Changed
+
+  public static final int BUTTON_SENSOR = 4; 
+  public static final int BUTTON_SENSOR_1 = 6; // Needs to be Changed 
+  public static final int BUTTON_SENSOR_2 = 7; //Needs to be Changed 
 
 }
