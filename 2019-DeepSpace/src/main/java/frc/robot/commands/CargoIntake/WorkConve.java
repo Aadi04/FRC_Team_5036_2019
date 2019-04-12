@@ -30,11 +30,12 @@ public class WorkConve extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if (Robot.m_conveyor.buttonSensor() == false){
+    if (Robot.m_conveyor.buttonSensor() == false || Robot.m_conveyor.buttonSensor2() == false || Robot.m_conveyor.buttonSensor1() == false){
       return true;
     } else{
       return false;
     }
+    
   }
 
   // Called once after isFinished returns true

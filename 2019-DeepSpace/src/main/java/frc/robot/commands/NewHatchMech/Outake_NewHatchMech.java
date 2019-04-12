@@ -26,7 +26,7 @@ public class Outake_NewHatchMech extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_newHatch.runIntake(0.6);
+    Robot.m_newHatch.runIntake(0.7);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -39,7 +39,7 @@ public class Outake_NewHatchMech extends Command {
   @Override
   protected void end() {
     Robot.m_newHatch.runIntake(0);
-    //Robot.m_newHatch.LEDS();
+    Robot.m_newHatch.LEDS();
   }
 
   // Called when another command which requires one or more of the same

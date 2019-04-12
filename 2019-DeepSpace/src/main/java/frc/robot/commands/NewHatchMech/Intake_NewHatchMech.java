@@ -33,23 +33,35 @@ public class Intake_NewHatchMech extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    // if (Robot.m_newHatch.LimitSwitch1() == true && Robot.m_newHatch.LimitSwitch2() == true)
-    // {
-    //   return true;
-    // }
-    // else 
-    // {
-    //   return false;
-    // }
-    return false;
+    if (Robot.m_newHatch.LimitSwitch1() == false && Robot.m_newHatch.LimitSwitch2() == false)
+    {
+      return true;
+    }
+    else 
+    {
+      
+      return false;
+    }
+    
+    
 
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.m_newHatch.runIntake(0);
-    //Robot.m_newHatch.LEDS();
+    if (Robot.m_newHatch.LimitSwitch1() == false)
+    {
+      System.out.print(Robot.m_newHatch.LimitSwitch1());
+      System.out.print(Robot.m_newHatch.LimitSwitch2());
+      Robot.m_newHatch.runIntake(-0.15);
+    }
+    else
+    {
+      Robot.m_newHatch.runIntake(0);
+    }
+    
+    Robot.m_newHatch.LEDS();
     //Robot.m_conveyor.ledOn(1);
   }
 

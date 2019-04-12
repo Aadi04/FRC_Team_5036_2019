@@ -14,6 +14,7 @@ public class throtle extends Command {
   public throtle() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
+    System.out.println("in throttle ctor - requiring m_conveyor " + Robot.m_conveyor);
     requires(Robot.m_conveyor);
     
   }

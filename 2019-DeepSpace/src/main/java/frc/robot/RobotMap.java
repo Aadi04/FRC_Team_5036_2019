@@ -45,7 +45,7 @@ public class RobotMap {
   public static final int BABY_SHARK_OUT = 7;
 
   // new hatch mech
-  public static final int HATCH_INTAKE = 9; //Needs to be changed
+  public static final int HATCH_INTAKE = 7 ; //Needs to be changed
   
 
 

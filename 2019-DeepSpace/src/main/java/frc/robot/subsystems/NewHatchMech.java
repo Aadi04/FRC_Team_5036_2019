@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.subsystems.*;
 
@@ -22,7 +23,7 @@ public class NewHatchMech extends Subsystem{
 
    public VictorSP intake;
    public DigitalInput limitswitch1, limitswitch2;
-   public static Conveyor conveyor = new Conveyor();
+   public static Conveyor conveyor = Robot.m_conveyor;
    
 
    public NewHatchMech()
@@ -33,7 +34,9 @@ public class NewHatchMech extends Subsystem{
    }
    public void runIntake(double power)
    {
+        System.out.println("This is settting the power");
         intake.set(power);
+        
    }
    public boolean LimitSwitch1()
    {
@@ -45,7 +48,7 @@ public class NewHatchMech extends Subsystem{
    }
    public void LEDS()
    {
-        if (LimitSwitch1() == true && LimitSwitch2() == true)
+        if (LimitSwitch1() == false && LimitSwitch2() == false)
         {
             conveyor.ledOn(1);
         }

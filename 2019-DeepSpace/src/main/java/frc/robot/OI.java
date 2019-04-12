@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.CargoIntake.*;
 import frc.robot.commands.*;
 import frc.robot.commands.OldHatchCommands.*;
+import frc.robot.commands.NewHatchMech.ForceStopHatchIntakeSeq;
 import frc.robot.commands.NewHatchMech.HatchIntakeSeq;
 import frc.robot.commands.NewHatchMech.HatchOutakeSeq;
 import frc.robot.commands.Sequences.*;
@@ -43,6 +44,7 @@ public class OI
   private Button reverseSeq = new JoystickButton(operatorController, 4);// y button 
 
   private Button hatchIntake = new JoystickButton(operatorController, 5); //left trigger
+  private POVButton forceStopHatch = new POVButton(operatorController, 0);// Up button on the D-pad
   
   private Button scoreBall = new JoystickButton(driverController, 5);
   private Button scoreHatch = new JoystickButton(driverController, 6);
@@ -57,7 +59,7 @@ public class OI
    
   //private Button allPuncherOut = new JoystickButton(operatorController, 5);// Left trigger Pressed
   //private Button allPuncherIn = new JoystickButton(operatorController, 5);// Left Trigger Released
-  //private POVButton autoButton = new POVButton(operatorController, 0);
+  
 
 
   public OI()
@@ -71,10 +73,11 @@ public class OI
     this.sliderIn.whenPressed(new SliderInAndLED());
     this.sliderOut.whenPressed(new SliderOutAndLED());
     this.hatchIntake.whenPressed(new HatchIntakeSeq());
-    
+    this.forceStopHatch.whenPressed(new ForceStopHatchIntakeSeq());
     //Outake 
     this.scoreBall.whenPressed(new TimerDelayOutTake());
     this.scoreHatch.whenPressed(new HatchOutakeSeq());
+    
     
     this.visionAlign.whenPressed(new VisionTurnToAngle(1));
     

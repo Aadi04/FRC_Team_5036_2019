@@ -5,60 +5,50 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.CargoIntake;
+package frc.robot.commands.NewHatchMech;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class runIntake extends Command {
-  public runIntake() {
+public class Stall extends Command {
+  public Stall() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.m_intake);
-    requires(Robot.m_conveyor);
+    requires(Robot.m_newHatch);
   }
 
   // Called just before this Command runs the first time
   @Override
-  protected void initialize() 
-  {
-    System.out.println("its here");
-    
+  protected void initialize() {
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() 
-  {
-    Robot.m_intake.runningIntake(0.90);
-    Robot.m_conveyor.runConveyor(-0.65);
+  protected void execute() {
+    Robot.m_newHatch.runIntake(-0.1);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
-  protected boolean isFinished() 
-  {
-    if (Robot.m_conveyor.buttonSensor() == false || Robot.m_conveyor.buttonSensor1() == false || Robot.m_conveyor.buttonSensor() == false) 
+  protected boolean isFinished() {
+    if (Robot.m_newHatch.LimitSwitch1() == true && Robot.m_newHatch.LimitSwitch2() == true)
     {
-      return true;
-    } else {
       return false;
     }
-    // return !Robot.m_conveyor.buttonSensor();
-  
+    else 
+    {
+      return true;
+    }
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.m_conveyor.runConveyor(0);
-    Robot.m_intake.runningIntake(0); 
-    }
+  }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-
   }
 }

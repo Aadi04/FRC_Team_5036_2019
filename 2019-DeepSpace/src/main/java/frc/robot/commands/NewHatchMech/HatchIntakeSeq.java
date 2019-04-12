@@ -8,12 +8,14 @@
 package frc.robot.commands.NewHatchMech;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.Robot;
 import frc.robot.commands.OldHatchCommands.HatchSliderOut;
+import frc.robot.subsystems.NewHatchMech;
 
 public class HatchIntakeSeq extends CommandGroup {
   /**
    * Add your docs here.
-   */
+   */ public static NewHatchMech hatchMech = Robot.m_newHatch;
   public HatchIntakeSeq() {
     // Add Commands here:
     // e.g. addSequential(new Command1());
@@ -21,6 +23,8 @@ public class HatchIntakeSeq extends CommandGroup {
     // these will run in order.
     addSequential(new HatchSliderOut());
     addParallel(new Intake_NewHatchMech());
+   
+    
 
     // To run multiple commands at the same time,
     // use addParallel()

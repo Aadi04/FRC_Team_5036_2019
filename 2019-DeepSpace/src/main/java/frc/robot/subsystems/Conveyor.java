@@ -72,15 +72,16 @@ public class Conveyor extends Subsystem {
 
     @Override
     protected void initDefaultCommand() {
+      System.out.println("setting default command for conveyor -- conveyor=" + this);
       setDefaultCommand(new throtle());
 
     }
   
   public void updateConveyor()
   {
-    SmartDashboard.putBoolean("button", buttonSensor());
+    SmartDashboard.putBoolean("Button", buttonSensor2());
     SmartDashboard.putBoolean("button1", buttonSensor1());
-    SmartDashboard.putBoolean("button2", buttonSensor2());
+    SmartDashboard.putBoolean("button2", buttonSensor());
   }
  
 
