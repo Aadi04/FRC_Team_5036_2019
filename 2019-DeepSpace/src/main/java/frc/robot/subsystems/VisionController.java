@@ -53,7 +53,7 @@ public class VisionController extends Subsystem{
     }
 
     public double targetYaw() {
-		return tapeYaw.getDouble(999);
+		return tapeYaw.getDouble(0);
 	}
 	
 	public void enable() {
