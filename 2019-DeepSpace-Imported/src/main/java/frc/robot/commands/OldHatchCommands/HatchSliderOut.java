@@ -5,34 +5,35 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.NewHatchMech;
+package frc.robot.commands.OldHatchCommands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class ForceStopHatchIntake extends Command {
-  public ForceStopHatchIntake() {
+public class HatchSliderOut extends Command {
+  public HatchSliderOut() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.m_newHatch);
+    requires(Robot.m_hatch);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-
+    System.out.println("This is from PuncherOut");
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() {
-    Robot.m_newHatch.runIntake(0.15);
+  protected void execute() 
+  {
+    Robot.m_hatch.puncherPush();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return true;
   }
 
   // Called once after isFinished returns true

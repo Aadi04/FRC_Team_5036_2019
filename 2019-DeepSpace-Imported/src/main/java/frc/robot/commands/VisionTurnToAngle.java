@@ -5,34 +5,39 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.NewHatchMech;
+package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class ForceStopHatchIntake extends Command {
-  public ForceStopHatchIntake() {
+public class VisionTurnToAngle extends Command {
+
+  double setpoint, epsilon;
+  public VisionTurnToAngle(double epsilon) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.m_newHatch);
+    requires(Robot.m_DriveTrain);
+    requires(Robot.vision);
+    this.setpoint = Robot.vision.targetYaw();
+    this.epsilon = epsilon;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-
+    Robot.m_DriveTrain.resetGyro();
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_newHatch.runIntake(0.15);
+    Robot.m_DriveTrain.turnToAngle(setpoint, epsilon, 0.7);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return Robot.m_DriveTrain.atTarget();
   }
 
   // Called once after isFinished returns true

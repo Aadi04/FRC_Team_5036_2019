@@ -5,28 +5,30 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.NewHatchMech;
+package frc.robot.commands.CargoIntake;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class ForceStopHatchIntake extends Command {
-  public ForceStopHatchIntake() {
+public class throtle extends Command {
+  public throtle() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.m_newHatch);
+    System.out.println("in throttle ctor - requiring m_conveyor " + Robot.m_conveyor);
+    requires(Robot.m_conveyor);
+    
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() {
-    Robot.m_newHatch.runIntake(0.15);
+  protected void execute() 
+  {
+    Robot.m_conveyor.runConveyor(-Robot.m_oi.getThrottle());
   }
 
   // Make this return true when this Command no longer needs to run execute()

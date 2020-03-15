@@ -5,39 +5,58 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.NewHatchMech;
+package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
-public class ForceStopHatchIntake extends Command {
-  public ForceStopHatchIntake() {
+public class changePIDConstants extends Command {
+  double newkP, newkI, newkD, newSetpoint;
+
+  public changePIDConstants() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.m_newHatch);
+    requires(Robot.m_DriveTrain);
+    
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    this.newkP = 0;
+    this.newSetpoint = 0;
+    this.newkI = 0;
+    this.newkD = 0;
 
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_newHatch.runIntake(0.15);
+    newkP = SmartDashboard.getNumber("kP",0.0);
+    newkI = SmartDashboard.getNumber("kI", 0.0);
+    newkD = SmartDashboard.getNumber("kD", 0.0);
+    newSetpoint = SmartDashboard.getNumber("Setpoint", 0.0);
+
+    Robot.m_DriveTrain.drivekP = newkP;
+    Robot.m_DriveTrain.drivekI = newkI;
+    Robot.m_DriveTrain.drivekD = newkD;
+    Robot.m_DriveTrain.setPoint = newSetpoint;
+
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return true;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    System.out.println(Robot.m_DriveTrain.setPoint);
+    System.out.println(Robot.m_DriveTrain.drivekP);
   }
 
   // Called when another command which requires one or more of the same
