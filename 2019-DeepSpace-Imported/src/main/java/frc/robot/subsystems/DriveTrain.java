@@ -73,7 +73,8 @@ public class DriveTrain extends Subsystem {
     //drivePID = new PIDController(NumberConstants.drive_kP, NumberConstants.drive_kI, NumberConstants.drive_kD);
   }
   @Override
-  public void initDefaultCommand() {
+  public void initDefaultCommand() 
+  {
     setDefaultCommand(new ArcadeDrive());
   }
 
@@ -165,13 +166,6 @@ public void driveDistance(double setPoint, double epsilon, double const_multipli
   leftGearbox((-output + (getCurrentAngle()*0.03))*const_multiplier);
   rightGearbox((output - (getCurrentAngle()*0.03))*const_multiplier);
 }
-
-// public double atTarget (){
-//   if (drivePID.isDone()){
-//     atTargetCount++;
-//   }
-//   return atTargetCount;
-// }
 
 public void updateDrivetrainSensors(){
   SmartDashboard.putNumber("GyroAngle", getCurrentAngle());

@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.buttons.POVButton;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.CargoIntake.*;
+import frc.robot.Utils.ControllerConstants;
 import frc.robot.commands.*;
 import frc.robot.commands.OldHatchCommands.*;
 import frc.robot.commands.NewHatchMech.ForceStopHatchIntakeSeq;
@@ -35,19 +36,19 @@ public class OI
   public Joystick operatorController = new Joystick(RobotMap.OPERATOR_PORT);
 
  
-  private Button forceStopIntake = new JoystickButton(operatorController, 8); // start button
-  private Button fullintakeSequence = new JoystickButton(operatorController, 6); // right trigger
+  private Button forceStopIntake = new JoystickButton(operatorController, ControllerConstants.START_BUTTON); // start button
+  private Button fullintakeSequence = new JoystickButton(operatorController, ControllerConstants.R1_BUTTON); // right trigger
   
   
-  private Button sliderIn =  new JoystickButton(operatorController, 2); //b button
-  private Button sliderOut = new JoystickButton(operatorController, 3); //x button
-  private Button reverseSeq = new JoystickButton(operatorController, 4);// y button 
+  private Button sliderIn =  new JoystickButton(operatorController, ControllerConstants.RED_BUTTON); //b button
+  private Button sliderOut = new JoystickButton(operatorController, ControllerConstants.BLUE_BUTTON); //x button
+  private Button reverseSeq = new JoystickButton(operatorController, ControllerConstants.YELLOW_BUTTON);// y button 
 
-  private Button hatchIntake = new JoystickButton(operatorController, 5); //left trigger
+  private Button hatchIntake = new JoystickButton(operatorController, ControllerConstants.L1_BUTTON); //left trigger
   private POVButton forceStopHatch = new POVButton(operatorController, 0);// Up button on the D-pad
   
-  private Button scoreBall = new JoystickButton(driverController, 5);
-  private Button scoreHatch = new JoystickButton(driverController, 6);
+  private Button scoreBall = new JoystickButton(driverController, ControllerConstants.R1_BUTTON);
+  private Button scoreHatch = new JoystickButton(driverController, ControllerConstants.L1_BUTTON);
 
   private Button visionAlign = new JoystickButton(operatorController, 1); // chnage the button if you want
 
@@ -110,9 +111,9 @@ public class OI
 
   public double getRotate()
   {
-    // double rotate = ((driverController.getRawAxis(4))*0.6) + 0.4 * Math.pow(driverController.getRawAxis(4), 3);
+    double rotate = ((driverController.getRawAxis(4))*0.6) + 0.4 * Math.pow(driverController.getRawAxis(4), 3);
     //Change double rotate to just driverController.getRawaxis(4); if this doesnt work
-    double rotate = driverController.getRawAxis(4) * 0.5;
+    //double rotate = driverController.getRawAxis(4) * 0.5;
     if (Math.abs(rotate)<0.03)
       return 0.0;
     else 

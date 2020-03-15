@@ -36,12 +36,11 @@ public class NewHatchMech extends Subsystem{
    {
         System.out.println("This is settting the power");
         intake.set(power);
-        
    }
    public boolean LimitSwitch1()
    {
         return limitswitch1.get();
-    }
+   }
    public boolean LimitSwitch2()
    {
         return limitswitch2.get();
